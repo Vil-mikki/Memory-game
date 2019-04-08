@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #CFD0CF;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    font-size: 42px;
+    line-height: 47px;
+    color: #434344;
+}
+
+.game-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.game {
+    display: grid;
+    grid-template-columns: repeat(4, 130px);
+    grid-template-rows: repeat(3, 130px);
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+    list-style: none;
+}
+
+.game__card {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to top right, #22AB93, #19668D);
+    border: 5px solid #fff;
+    border-radius: 9px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+    perspective: 600px;
+    cursor: pointer;
+}
+
+.card-open {
+    animation: .3s linear openRotate;
+    animation-fill-mode: forwards;
+}
+
+.card-close {
+    animation: .3s linear closeRotate;
+    animation-fill-mode: forwards;
+}
+
+.card-open::after {
+    content: attr(data-em);
+    opacity: 0;
+    font-size: 75px;
+    animation: .2s linear forwards animal;
+}
+
+.card-close::after {
+    content: attr(data-em);
+    opacity: 0;
+    font-size: 75px;
+    animation: .1s linear forwards animalc;
+}
+
+@keyframes openRotate {
+    to {
+        transform: rotate3d(0, 1, -.1, .5turn);
+        background: #fff;
+    }
+}
+
+@keyframes closeRotate {
+    from{
+        background: #fff;
+    }
+    to {
+        transform: rotate3d(0, 1, .1, .5turn);
+        background: linear-gradient(to top right, #22AB93, #19668D);
+    }
+}
+
+@keyframes animal {
+    55% {
+        opacity: .1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes animalc {
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
