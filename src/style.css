@@ -35,69 +35,54 @@ body {
 .game__card {
     display: flex;
     justify-content: center;
+    font-size: 75px;
     background: linear-gradient(to top right, #22AB93, #19668D);
     border: 5px solid #fff;
     border-radius: 9px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
-    perspective: 600px;
+    transform-style: preserve-3d;
+    transition: .3s linear;
     cursor: pointer;
 }
 
+.game__card::before {
+    content: attr(data-em);
+    border-radius: 9px;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    background: #fff;
+    opacity: 0;
+    transition: opacity .05s step-end;
+}
+
 .card-open {
-    animation: .3s linear openRotate;
-    animation-fill-mode: forwards;
+    border: none;
+    transform: rotateY(180deg);
+    transition: .3s linear;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, .5);
+    pointer-events: none;
 }
 
-.card-close {
-    animation: .3s linear closeRotate;
-    animation-fill-mode: forwards;
+
+.card-open::before {
+    opacity: 1;
+    transition: opacity .05s step-end;
 }
 
-.card-open::after {
-    content: attr(data-em);
-    opacity: 0;
-    font-size: 75px;
-    animation: .2s linear forwards animal;
+.match.game__card::before {
+    background: #5AD66F;
 }
 
-.card-close::after {
-    content: attr(data-em);
-    opacity: 0;
-    font-size: 75px;
-    animation: .1s linear forwards animalc;
+.nomatch.game__card::before {
+    background: #F44336;
 }
 
-@keyframes openRotate {
-    to {
-        transform: rotate3d(0, 1, -.1, .5turn);
-        background: #fff;
-    }
-}
 
-@keyframes closeRotate {
-    from{
-        background: #fff;
-    }
-    to {
-        transform: rotate3d(0, 1, .1, .5turn);
-        background: linear-gradient(to top right, #22AB93, #19668D);
-    }
-}
 
-@keyframes animal {
-    55% {
-        opacity: .1;
-    }
-    100% {
-        opacity: 1;
-    }
-}
+/*
+.match {
+    background: #5AD66F;
+}*/
 
-@keyframes animalc {
-    30% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
